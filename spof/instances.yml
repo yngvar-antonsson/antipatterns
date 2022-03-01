@@ -1,0 +1,28 @@
+---
+spof.router:
+  advertise_uri: localhost:3301
+  http_port: 8081
+
+spof.s1-master:
+  advertise_uri: localhost:3302
+  http_port: 8082
+
+spof.s1-replica:
+  advertise_uri: localhost:3303
+  http_port: 8083
+
+spof.s2-master:
+  advertise_uri: localhost:3304
+  http_port: 8084
+
+spof.s2-replica:
+  advertise_uri: localhost:3305
+  http_port: 8085
+
+spof.dictionary:
+  advertise_uri: localhost:3306
+  http_port: 8086
+
+spof-stateboard:
+  listen: localhost:4401
+  password: passwd
