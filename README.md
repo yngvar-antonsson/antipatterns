@@ -6,7 +6,6 @@
 - Ссылки:
     - [space:select](https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/select/)
     - [CRUD](https://github.com/tarantool/crud)
-    - [Разработка на Cartridge](https://www.tarantool.io/ru/doc/latest/book/cartridge/cartridge_dev/)
 
 ## SPOF
 

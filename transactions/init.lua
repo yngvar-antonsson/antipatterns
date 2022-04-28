@@ -17,15 +17,12 @@ if not fio.path.exists(workdir) then
     assert(ok, "Failed to create working directory " .. workdir .. ": ")
 end
 
-
 box.cfg{
     wal_dir=workdir,
     memtx_dir=workdir,
 
-    -- instance_uuid='aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa'..instance_id,
-    -- replicaset_uuid = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa0',
-    listen='127.0.0.1:'..port,
-    replication_connect_quorum = 0,
+    listen='127.0.0.1:' .. port,
+    replication_connect_quorum = 1,
     replication = {'localhost:3301', 'localhost:3302'},
     read_only = instance_id ~= '1',
 }

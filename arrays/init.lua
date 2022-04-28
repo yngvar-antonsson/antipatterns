@@ -70,6 +70,8 @@ t = clock.time() - t
 
 log.info('Storage 1 update time: %f', t)
 
+-- Storage 1 update time: 0.39773
+
 t = clock.time()
 
 box.begin()
@@ -84,5 +86,7 @@ box.commit()
 t = clock.time() - t
 
 log.info('Storage 2 update time: %f', t)
+
+-- Storage 1 update time: 0.00036
 
 os.exit()
