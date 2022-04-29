@@ -40,3 +40,27 @@
 - Ссылки:
     - [Тестирование](https://habr.com/ru/company/vk/blog/563446/)
     - [Мониторинг](https://habr.com/ru/company/vk/blog/534826/)
+
+## Как установить Tarantool (для запуска примеров)
+
+- Установка на Debian или Ubuntu:
+  ```bash
+  curl -L https://tarantool.io/fJPRtan/release/2.8/installer.sh | bash
+  sudo apt install cartridge-cli
+  ```
+
+- Установка на CentOS, Fedora или ALT Linux:
+  ```bash
+  curl -L https://tarantool.io/fJPRtan/release/2.8/installer.sh | bash
+  sudo yum install cartridge-cli
+  ```
+
+- Установка на MacOS:
+  ```bash
+  brew install tarantool
+  brew install cartridge-cli
+  ```
+
+### Если что-то не работает
+
+Возможно у вас запущен инстанс Tarantool. Завершите его с помощью `pkill -9 tarantool`

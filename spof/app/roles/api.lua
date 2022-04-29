@@ -20,7 +20,8 @@ local function get_employees_by_salary(request)
         return acc
     end, {})
 
-    local deps_data = rpc.call('dictionary', 'select', department_ids)
+    local connection = assert(rpc.get_connection('app.roles.dictionary'))
+    local deps_data = connection:call('select', department_ids)
 
     employees = fun.iter(employees):map(function(x)
         return {

@@ -1,10 +1,8 @@
-# Simple Tarantool Cartridge-based application
+# SPOF
 
-This a simplest application based on Tarantool Cartridge.
+В данном разделе пример не очень удачной архитектуры приложения со словарями на отдельном инстансе.
 
-## Quick start
-
-To build application and setup topology:
+Запуск:
 
 ```bash
 cartridge build
@@ -12,78 +10,23 @@ cartridge start -d
 cartridge replicasets setup --bootstrap-vshard
 ```
 
-Now you can visit http://localhost:8081 and see your application's Admin Web UI.
+По адресу http://localhost:8081 доступен WebUI.
 
-**Note**, that application stateboard is always started by default.
-See [`.cartridge.yml`](./.cartridge.yml) file to change this behavior.
+Код ролей можно посмотреть в папке `app/roles`.
 
-## Application
+## Как исправить?
 
-Application entry point is [`init.lua`](./init.lua) file.
-It configures Cartridge, initializes admin functions and exposes metrics endpoints.
-Before requiring `cartridge` module `package_compat.cfg()` is called.
-It configures package search path to correctly start application on production
-(e.g. using `systemd`).
+- Назначить роль `app.roles.dictionary` на router
 
-## Roles
+ИЛИ
 
-Application has one simple role, [`app.roles.custom`](./app/roles/custom.lua).
-It exposes `/hello` and `/metrics` endpoints:
-
-```bash
-curl localhost:8081/hello
-curl localhost:8081/metrics
-```
-
-Also, Cartridge roles [are registered](./init.lua)
-(`vshard-storage`, `vshard-router` and `metrics`).
-
-You can add your own role, but don't forget to register in using
-`cartridge.cfg` call.
-
-## Instances configuration
-
-Configuration of instances that can be used to start application
-locally is places in [instances.yml](./instances.yml).
-It is used by `cartridge start`.
-
-## Topology configuration
-
-Topology configuration is described in [`replicasets.yml`](./replicasets.yml).
-It is used by `cartridge replicasets setup`.
-
-## Tests
-
-Simple unit and integration tests are placed in [`test`](./test) directory.
-
-First, we need to install test dependencies:
-
-```bash
-./deps.sh
-```
-
-Then, run linter:
-
-```bash
-.rocks/bin/luacheck .
-```
-
-Now we can run tests:
-
-```bash
-cartridge stop  # to prevent "address already in use" error
-.rocks/bin/luatest -v
-```
-
-## Admin
-
-Application has admin function [`probe`](./app/admin.lua) configured.
-You can use it to probe instances:
-
-```bash
-cartridge start -d  # if you've stopped instances
-cartridge admin probe \
-  --name spof \
-  --run-dir ./tmp/run \
-  --uri localhost:3302
-```
+- Добавить реплик в репликасет dictionary
+- Поменять в функции `app.roles.api.`:
+  ```lua
+  local connection = assert(cartridge_rpc.get_connection('app.roles.dictionary', {leader_only = false}))
+  local deps_data = connection:call('select', department_ids)
+  ```
+- (Опционально) поставить для этого репликасета галочку ALL_RW **или** сделать спейс `box.space.departments` синхронным:
+  ```lua
+  box.space.departments:alter{is_async = true}
+  ```
