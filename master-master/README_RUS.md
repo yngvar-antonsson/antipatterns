@@ -1,16 +1,16 @@
-# Master-master replication without triggers
+# Мастер-мастер репликация без триггеров
 
-First tab:
+В первой вкладке:
 ```bash
 tarantool init.lua 1
 ```
 
-Second tab:
+Во второй вкладке:
 ```bash
 tarantool init.lua 2
 ```
 
-On both instances:
+На обоих инстансах:
 ```lua
 do
     local fiber = require'fiber'
@@ -24,11 +24,11 @@ do
 end
 ```
 
-Got an error ```ER_TUPLE_FOUND: Duplicate key exists in unique index "primary" in space "test" with old tuple - [1642282400, 1.64228e+09, "Hello"] and new tuple - [1642282400, 1.64228e+09, "Hello"]```
+Получаем ошибку ```ER_TUPLE_FOUND: Duplicate key exists in unique index "primary" in space "test" with old tuple - [1642282400, 1.64228e+09, "Hello"] and new tuple - [1642282400, 1.64228e+09, "Hello"]```
 
-## How to fix?
+## Как исправить?
 
-Before `box.cfg` call add this code:
+Перед вызовом `box.cfg` добавляем:
 
 ```lua
 local my_trigger = function(old, new, _, op)

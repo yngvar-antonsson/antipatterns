@@ -1,18 +1,18 @@
-# Transactions before connecting to a replica
+# Транзакции перед подключением к реплике
 
-First tab:
+В первом окне:
 
 ```bash
 tarantool init.lua 1
 ```
 
-Second tab:
+Во втором окне:
 
 ```bash
 tarantool init.lua 2
 ```
 
-First tab:
+В первом окне:
 
 ```lua
 box.space.storage:put{'key1', 'value1'}
@@ -25,20 +25,20 @@ box.space.storage:put{'key4', 'value4'}
 box.space.storage:put{'key5', 'value5'}
 ```
 
-Stop Tarantool with ^C
+Завершаем первый Tarantool с помощью ^C
 
-Remove xlogs:
+Удаляем xlog'и:
 ```bash
 rm data/1/*.xlog
 ```
 
-Start Tarantool again:
+Запускаем Tarantool снова:
 
 ```bash
 tarantool init.lua 1
 ```
 
-Second tab:
+Во втором окне:
 
 ```lua
 box.space.storage:select()
@@ -55,7 +55,7 @@ box.space.storage:select()
 ...
 ```
 
-First tab:
+В первом окне:
 
 ```lua
 box.space.storage:select()
@@ -70,7 +70,7 @@ box.space.storage:select()
 ...
 ```
 
-## How to fix
+## Как починить
 
-- Change `replication_connect_quorum = 1`
-- Try again with a new data (or remove old data `rm -rf data` and try again)
+- Поменять `replication_connect_quorum = 1`
+- Повторить с новыми данными (или сделать `rm -rf data` и повторить заново)
