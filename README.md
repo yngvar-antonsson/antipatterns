@@ -1,66 +1,66 @@
-# Топ-5 провальных решений при разработке на Tarantool
+# Top 5 bad decisions when dealing with in-memory databases
 
-## Map-reduce, который убивает
+## Map-reduce, which kills
 
-- [Примеры](select/README.md)
-- Ссылки:
+- [Examples](select/README.md)
+- Links:
     - [space:select](https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/select/)
     - [CRUD](https://github.com/tarantool/crud)
 
 ## SPOF
 
-- [Примеры](spof/README.md)
-- Ссылки:
-    - [Vshard-роутер](https://www.tarantool.io/en/doc/latest/reference/reference_rock/vshard/vshard_architecture/#vshard-router)
-    - [Кластеры на Cartridge](https://habr.com/ru/company/vk/blog/596241/)
+- [Examples](spof/README.md)
+- Links:
+    - [Vshard-router](https://www.tarantool.io/en/doc/latest/reference/reference_rock/vshard/vshard_architecture/#vshard-router)
+    - [Cartridge clusters](https://dev.to/tarantool/scaling-clusters-without-any-hassle-46in)
 
-## Неструктурированные данные
+## Unstructured data
 
-- [Примеры](arrays/README.md)
-- Ссылки:
+- [Examples](arrays/init.lua)
+- Links:
     - [space:format](https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/format/)
     - [slab_alloc_factor](https://www.tarantool.io/en/doc/latest/reference/configuration/#confval-slab_alloc_factor)
 
-## Мастер-мастер репликация без триггеров
+## Master-master replication without triggers
 
-- [Примеры](master-master/README.md)
-- Ссылки:
-    - [Мастер-мастер в Tarantool](https://habr.com/ru/company/vk/blog/524476/)
-    - [before_replace триггер](https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/before_replace/)
+- [Examples](master-master/README.md)
+- Links:
+    - [Мастер-мастер в Tarantool](https://www.tarantool.io/en/doc/latest/concepts/replication/repl_architecture/#replication-roles-master-and-replica)
+    - [before_replace trigger](https://www.tarantool.io/en/doc/latest/reference/reference_lua/box_space/before_replace/)
 
-## Транзакции перед подключением к реплике
+## Transactions before connecting to a replica
 
-- [Примеры](transactions/README.md)
-- Ссылки:
-    - [Транзакции](https://www.tarantool.io/en/doc/latest/book/box/atomic/)
-    - [Репликация](https://www.tarantool.io/en/doc/latest/book/replication/repl_architecture/)
+- [Examples](transactions/README.md)
+- Links:
+    - [Transactions](https://www.tarantool.io/en/doc/latest/book/box/atomic/)
+    - [Replication](https://www.tarantool.io/en/doc/latest/book/replication/repl_architecture/)
 
-## Как не допустить проблем?
+## How to avoid problems?
 
-- Ссылки:
-    - [Тестирование](https://habr.com/ru/company/vk/blog/563446/)
-    - [Мониторинг](https://habr.com/ru/company/vk/blog/534826/)
+- Links:
+    - [Tests](https://dev.to/tarantool/how-to-write-three-times-fewer-lines-of-code-when-doing-load-testing-9lb)
+    - [Monitoring](https://www.tarantool.io/en/doc/latest/book/monitoring/)
 
-## Как установить Tarantool (для запуска примеров)
+## How to install
 
-- Установка на Debian или Ubuntu:
+- Debian/Ubuntu:
   ```bash
   curl -L https://tarantool.io/fJPRtan/release/2.8/installer.sh | bash
   sudo apt install cartridge-cli
   ```
 
-- Установка на CentOS, Fedora или ALT Linux:
+- CentOS/Fedora/ALT Linux:
   ```bash
   curl -L https://tarantool.io/fJPRtan/release/2.8/installer.sh | bash
   sudo yum install cartridge-cli
   ```
 
-- Установка на MacOS:
+- MacOS:
   ```bash
   brew install tarantool
   brew install cartridge-cli
   ```
 
-### Если что-то не работает
+### If something hasn't worked
 
-Возможно у вас запущен инстанс Tarantool. Завершите его с помощью `pkill -9 tarantool`
+Probably you have a running Tarantool instance. Stop it with `pkill -9 tarantool`

@@ -1,8 +1,8 @@
 # SPOF
 
-В данном разделе пример не очень удачной архитектуры приложения со словарями на отдельном инстансе.
+This directory contains bad exaple of application architecture with dictionaries on a separated instance.
 
-Запуск:
+How to start:
 
 ```bash
 cartridge build
@@ -10,23 +10,23 @@ cartridge start -d
 cartridge replicasets setup --bootstrap-vshard
 ```
 
-По адресу http://localhost:8081 доступен WebUI.
+You will see WebUI on http://localhost:8081.
 
-Код ролей можно посмотреть в папке `app/roles`.
+Roles code is in `app/roles` folder.
 
-## Как исправить?
+## How to fix?
 
-- Назначить роль `app.roles.dictionary` на router
+- Select roles `app.roles.dictionary` on router
 
-ИЛИ
+OR
 
-- Добавить реплик в репликасет dictionary
-- Поменять в функции `app.roles.api.`:
+- Add replicas to dictionary replicaset
+- Change function `app.roles.api.get_employees_by_salary`:
   ```lua
   local connection = assert(cartridge_rpc.get_connection('app.roles.dictionary', {leader_only = false}))
   local deps_data = connection:call('select', department_ids)
   ```
-- (Опционально) поставить для этого репликасета галочку ALL_RW **или** сделать спейс `box.space.departments` синхронным:
+- (Optional) add ALL_RW to this replicaset **or** make space `box.space.departments` synchronious:
   ```lua
-  box.space.departments:alter{is_async = true}
+  box.space.departments:alter{is_sync = true}
   ```
