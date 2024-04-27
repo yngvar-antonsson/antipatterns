@@ -1,5 +1,7 @@
 # Top 5 bad decisions when dealing with in-memory databases
 
+Read this [article](https://medium.com/@tarantool/top-5-bad-decisions-when-dealing-with-in-memory-databases-4b2d1fe39317) first.
+
 ## Map-reduce, which kills
 
 - [Examples](select/README.md)
