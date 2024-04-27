@@ -1,5 +1,7 @@
 # Топ-5 провальных решений при разработке на Tarantool
 
+Связанные [статья](https://habr.com/ru/companies/vk/articles/672386/) и [доклад](https://www.youtube.com/watch?v=-FBKkyt1NJ0).
+
 ## Map-reduce, который убивает
 
 - [Примеры](select/README_RUS.md)
